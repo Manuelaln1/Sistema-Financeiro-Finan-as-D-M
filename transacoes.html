@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema Financeiro</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+  <h1>Sistema Financeiro</h1>
+
+  <div class="sidebar-user d-flex align-items-center mb-3">
+    <a href="usuario.html" class="d-flex align-items-center text-white text-decoration-none sidebar-user-link" title="Editar perfil">
+      <img id="sidebarFoto" src="../img/default-avatar.png" class="sidebar-avatar" alt="Foto do usuário">
+      <span id="sidebarNome" class="ms-2">Usuário</span>
+    </a>
+  </div>
+
+  <ul class="menu">
+    <li><a href="index.html"> Dashboard</a></li>
+    <li>
+      <a href="#transacoesCollapse" class="dropdown-toggle" data-bs-toggle="collapse" role="button">Transações</a>
+      <div class="collapse show" id="transacoesCollapse">
+        <ul class="submenu">
+          <li><a href="transacoes.html">Cadastrar Transação</a></li>
+          <li><a href="listarTransacoes.html">Listar Transações</a></li>
+          <li><a href="metas.html">Metas</a></li>
+        </ul>
+      </div>
+    </li>
+    <li><a href="#"> Categorias</a></li>
+    <li><a href="#"> Relatórios</a></li>
+    <li><a href="#"> Configurações</a></li>
+  </ul>
+</div>
+
+    <!-- Conteúdo principal -->
+    <div class="content" id="main-content">
+      <!-- Conteúdo do formulário de cadastro, visível por padrão -->
+      <div id="cadastro-form">
+        <h2>Cadastrar Transação</h2>
+
+        <form id="formTransacao">
+          <div class="row mb-3">
+            <div class="col-md-5">
+              <label for="titulo" class="form-label">Título</label>
+              <input
+                type="text"
+                class="form-control"
+                id="titulo"
+                placeholder="Digite o título da transação"
+                autocomplete="off"
+              />
+            </div>
+            <div class="col-md-4">
+              <label for="data" class="form-label">Data</label>
+              <input type="date" class="form-control" id="data" />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <label for="banco" class="form-label">Banco</label>
+              <select class="form-select" id="banco">
+                <option value="">Selecione</option>
+                <option value="bb">Banco do Brasil</option>
+                <option value="nubank">Nubank</option>
+                <option value="inter">Inter</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Movimento</label>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="movimento"
+                  id="despesa"
+                  value="despesa"
+                />
+                <label class="form-check-label" for="despesa">Despesa</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="movimento"
+                  id="receita"
+                  value="receita"
+                />
+                <label class="form-check-label" for="receita">Receita</label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="movimento"
+                  id="investimento"
+                  value="investimento"
+                />
+                <label class="form-check-label" for="investimento"
+                  >Investimento</label
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="valor" class="form-label">Valor</label>
+              <input
+                type="text"
+                class="form-control"
+                id="valor"
+                placeholder="0,00"
+                step="0.01"
+                min="0"
+              />
+            </div>
+            <div class="col-md-3">
+              <label for="categoria" class="form-label">Categoria</label>
+              <input
+                type="text"
+                class="form-control"
+                id="categoria"
+                placeholder="Ex: Alimentação"
+              />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label for="descricao" class="form-label">Descrição</label>
+              <textarea
+                class="form-control"
+                id="descricao"
+                rows="3"
+                placeholder="Digite a descrição da transação"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 d-flex gap-2">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+              <button type="reset" class="btn btn-secondary">Cancelar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Conteúdo da tabela de listagem, oculto por padrão -->
+      <div id="listagem-transacoes" style="display: none">
+        <h2>Listar Transações</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Data</th>
+                <th>Banco</th>
+                <th>Movimento</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+              </tr>
+            </thead>
+            <tbody id="transacoes-body">
+              <!-- As transações serão inseridas aqui via JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Fim da div do conteúdo principal -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Seu JS -->
+    <script src="../js/app.js"></script>
+    <script src="../js/global.js"></script>
+  </body>
+</html>
